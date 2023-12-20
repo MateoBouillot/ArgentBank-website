@@ -1,0 +1,9 @@
+@import '../../Style/mixins.scss';
+
+.features {
+    display: flex;
+    flex-direction: column;
+    @include media-min(920px) {
+        flex-direction: row;
+    }
+}
