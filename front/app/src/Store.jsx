@@ -1,5 +1,5 @@
 import { configureStore } from "@reduxjs/toolkit"
-import { chat, money, security } from './assets/List'
+import { chat, money, security, Account1, Account2, Account3 } from './assets/List'
 
 let state = {
     value: null,
@@ -7,6 +7,11 @@ let state = {
         chat,
         money,
         security
+    ],
+    accounts: [
+        Account1,
+        Account2,
+        Account3
     ]
 }
 
