@@ -4,7 +4,10 @@ const initialState = {
     token: null,
     loggedIn: false,
     loading: false,
-    error: null
+    error: null,
+    username: null,
+    firstName: null,
+    lastName: null
 }
 
 export const logSlice = createSlice( {
@@ -15,7 +18,7 @@ export const logSlice = createSlice( {
             state.loading = true
             state.error = null
         },
-        loginSucsess: (state, action) => {
+        loginSuccess: (state, action) => {
             state.loading = false
             state.loggedIn = true
             state.token = action.payload.token
@@ -27,9 +30,14 @@ export const logSlice = createSlice( {
         logOut: (state) => {
             state.token = null
             state.loggedIn = false
+        },
+        getInfo: (state, action) => {
+            state.username = action.payload.username
+            state.firstName = action.payload.firstName
+            state.lastName = action.payload.lastName
         }
     }
 })
 
-export const { loginStart, loginSucsess, loginFailure, logOut } = logSlice.actions
+export const { loginStart, loginSuccess, loginFailure, logOut, getInfo } = logSlice.actions
 export default logSlice.reducer
