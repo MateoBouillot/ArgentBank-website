@@ -1,6 +1,6 @@
 import './HeaderNav.scss'
 import logo from '../../assets/argentBankLogo.png'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import {useStore, useDispatch} from 'react-redux'
 import { checkLogIn, logout } from '../../redux/logThunk'
 
@@ -8,11 +8,12 @@ import { checkLogIn, logout } from '../../redux/logThunk'
 function HeaderNav () {
     const dispatch = useDispatch()
     const store = useStore()
+    const navigate = useNavigate()
 
     dispatch(checkLogIn)
 
     const handleClick = () => {
-        dispatch(logout())
+        dispatch(logout(navigate))
     }
 
     return <nav className="navbar">
@@ -23,7 +24,7 @@ function HeaderNav () {
         {store.getState().loggedIn === true ?
         <div className='navbar__items'><Link to='/User' className='navbar__item'>
             <i className="fa fa-user-circle"></i> 
-            {store.getState().username}
+            {store.getState().username || localStorage.getItem('username')}
         </Link>
         <Link to='/' className='navbar__item' onClick={handleClick}>
             <i className="fa fa-sign-out"></i>

@@ -1,14 +1,14 @@
 import { loginStart, loginSuccess, loginFailure, logOut, getInfo } from './logSlice'
 
 
-export const logout = (dispatch) => {
-    localStorage.removeItem('token')
+export const logout = (navigate) => (dispatch) => {
+    localStorage.clear()
     dispatch(logOut())
+    navigate('/')
 }
 
 export const userInfo = () => async (dispatch) => {
     const token = localStorage.getItem("token")
-    console.log('test')
 
     const data = await fetch('http://localhost:3001/api/v1/user/profile', {
         method: "POST",
@@ -18,6 +18,10 @@ export const userInfo = () => async (dispatch) => {
     })
 
     const info = await data.json()
+    localStorage.setItem('firstname', info.body.firstName)
+    localStorage.setItem('lastName', info.body.lastName)
+    localStorage.setItem('username', info.body.userName)
+
     dispatch(getInfo({ 
         username: info.body.userName,
         firstName: info.body.firstName,
@@ -39,42 +43,48 @@ export const changeUsername = (username) => async(dispatch) => {
         }
     })
     if (answer.status === 200) {
-        const data = await reponse.json()
-        console.log(data)
+        const data = await answer.json()
+        localStorage.setItem('username', data.body.userName)
         dispatch(getInfo({
-            username: info.body.userName,
-            firstName: info.body.firstName,
-            lastName: info.body.lastName
+            username: data.body.userName,
+            firstName: data.body.firstName,
+            lastName: data.body.lastName
         }))
     }
 }
 
-export const checkLogIn = (dispatch) => {
+export const checkLogIn = async (dispatch) => {
     const token = localStorage.getItem('token')
-    token ? dispatch(loginSuccess({token: token}), userInfo()) : dispatch(logOut())
+    if (token != null) {
+        dispatch(loginSuccess({token: token}))
+        dispatch(userInfo())
+    } else {
+        dispatch(logOut())
+    }
 }
 
-export const loginUser = (email, password) => async (dispatch) => {
+export const loginUser = (email, password, navigate) => async (dispatch) => {
 
     try {
         dispatch(loginStart())
 
-        const reponse = await fetch('http://localhost:3001/api/v1/user/login', {
+        const answer = await fetch('http://localhost:3001/api/v1/user/login', {
             method: "POST",
             body: JSON.stringify({email, password}),
             headers: {
                 "Content-Type": "application/json"
             }
         })
-        if (reponse.status === 400) {
+        if (answer.status === 400) {
             throw new Error('Invalid credentials')
         }
-        if (reponse.status === 200) {
-            const data = await reponse.json()
+        if (answer.status === 200) {
+            const data = await answer.json()
             localStorage.setItem('token', data.body.token)
 
             dispatch(loginSuccess({ token: data.body.token }))
-            dispatch(userInfo())
+            await dispatch(userInfo())
+            await navigate('/user')
         }
         
     } catch(error) {
