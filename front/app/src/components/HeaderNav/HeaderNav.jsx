@@ -1,20 +1,29 @@
 import './HeaderNav.scss'
-import logo from '../../assets/argentBankLogo.png'
+import logo from '../../assets/argentBankLogo.webp'
 import { Link, useNavigate } from 'react-router-dom'
-import {useStore, useDispatch} from 'react-redux'
+import { useEffect } from 'react'
+import {useStore, useDispatch, useSelector} from 'react-redux'
 import { checkLogIn, logout } from '../../redux/logThunk'
-
 
 function HeaderNav () {
     const dispatch = useDispatch()
     const store = useStore()
     const navigate = useNavigate()
+    const authToken = localStorage.getItem('token')
+
+    // const { username } = useSelector((state) => state.log)
 
     dispatch(checkLogIn)
 
     const handleClick = () => {
         dispatch(logout(navigate))
     }
+
+    // useEffect(() => {
+    //     if (authToken !== null && username === null) {
+    //       dispatch(getInfo())
+    //     }
+    //   }, [dispatch, authToken, username])
 
     return <nav className="navbar">
         <Link to='/' className="navbar__logo" >

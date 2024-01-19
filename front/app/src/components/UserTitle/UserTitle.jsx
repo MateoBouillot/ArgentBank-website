@@ -1,7 +1,7 @@
 import { useStore, useDispatch } from 'react-redux'
 import './UserTitle.scss'
 import { useState } from 'react'
-import { changeUsername } from '../../redux/logThunk'
+import { changeUsername } from '../../redux/infoThunk'
 
 function UserTitle () {
     const [form, setForm] = useState(false)
@@ -25,9 +25,9 @@ function UserTitle () {
     const saveName = () => {
         dispatch(changeUsername(username))
         setForm(false)
-        setTimeout(() => {
-            window.location.reload(false)
-        }, 500)
+        // setTimeout(() => {
+        //     window.location.reload(false)
+        // }, 500)
         
     }
 

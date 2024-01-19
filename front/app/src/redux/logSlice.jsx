@@ -3,11 +3,9 @@ import { createSlice } from '@reduxjs/toolkit'
 const initialState = {
     token: null,
     loggedIn: false,
-    loading: false,
+    loading: true,
     error: null,
-    username: null,
-    firstName: null,
-    lastName: null
+    
 }
 
 export const logSlice = createSlice( {
@@ -30,14 +28,10 @@ export const logSlice = createSlice( {
         logOut: (state) => {
             state.token = null
             state.loggedIn = false
-        },
-        getInfo: (state, action) => {
-            state.username = action.payload.username
-            state.firstName = action.payload.firstName
-            state.lastName = action.payload.lastName
         }
+        
     }
 })
 
-export const { loginStart, loginSuccess, loginFailure, logOut, getInfo } = logSlice.actions
+export const { loginStart, loginSuccess, loginFailure, logOut } = logSlice.actions
 export default logSlice.reducer

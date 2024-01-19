@@ -1,15 +1,20 @@
 import HeaderNav from '../../components/HeaderNav/HeaderNav'
 import Banner from '../../components/Banner/Banner'
-import { useStore } from 'react-redux'
+import { chat, money, security } from '../../assets/List'
 import TableFeatures from '../../components/tableFeatures/TableFeatures'
 import Footer from '../../components/Footer/Footer'
 import './Homepage.scss'
 
 
 
+
 function Homepage() {
 
-    const store = useStore()
+    const column = [
+        chat,
+        money,
+        security
+    ]
 
     return <>
         <HeaderNav />
@@ -17,7 +22,7 @@ function Homepage() {
         <section className='features'>
             <h2 className='sr-only'>Features</h2>
             {
-                store.getState().column.map(
+                column.map(
                     (item, index) => <TableFeatures key={index} info={item} />
                 )
             }

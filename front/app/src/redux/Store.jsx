@@ -1,26 +1,28 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit"
-import { chat, money, security, Account1, Account2, Account3 } from '../assets/List'
 import { logSlice } from './logSlice'
+import {infoSlice} from "./infoSlice"
+
 
 let state = {
-    value: null,
-    column: [
-        chat,
-        money,
-        security
-    ],
-    accounts: [
-        Account1,
-        Account2,
-        Account3
-    ]
+    log: null,
+    info: null
 }
+
 
 export const store = configureStore(
     {
         
         preloadedState: state,
-        reducer: logSlice.reducer
+        reducer: {
+            log: logSlice.reducer,
+            info: infoSlice.reducer
+        }
         
     }
 )
+
+
+
+
+// !!!!!! optimiser les images
+//     message d erreur
