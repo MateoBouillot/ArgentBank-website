@@ -11,12 +11,16 @@ export const userInfo = () => async (dispatch) => {
     })
 
     const info = await data.json()
-    localStorage.setItem('firstname', info.body.firstName)
+    localStorage.setItem('user', [
+        info.body.userName,
+        info.body.firstName,
+        info.body.lastName
+    ])
     localStorage.setItem('lastName', info.body.lastName)
     localStorage.setItem('username', info.body.userName)
 
     dispatch(getInfo({ 
-        username: info.body.userName,
+        userName: info.body.userName,
         firstName: info.body.firstName,
         lastName: info.body.lastName
     }))
@@ -39,7 +43,7 @@ export const changeUsername = (username) => async(dispatch) => {
         const data = await answer.json()
         localStorage.setItem('username', data.body.userName)
         dispatch(getInfo({
-            username: data.body.userName,
+            userName: data.body.userName,
             firstName: data.body.firstName,
             lastName: data.body.lastName
         }))

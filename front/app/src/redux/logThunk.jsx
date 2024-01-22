@@ -1,3 +1,4 @@
+import { userInfo } from './infoThunk'
 import { loginStart, loginSuccess, loginFailure, logOut } from './logSlice'
 
 

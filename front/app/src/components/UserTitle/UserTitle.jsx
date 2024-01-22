@@ -1,4 +1,4 @@
-import { useStore, useDispatch } from 'react-redux'
+import { useStore, useDispatch, useSelector } from 'react-redux'
 import './UserTitle.scss'
 import { useState } from 'react'
 import { changeUsername } from '../../redux/infoThunk'
@@ -6,8 +6,8 @@ import { changeUsername } from '../../redux/infoThunk'
 function UserTitle () {
     const [form, setForm] = useState(false)
     const store = useStore()
-    const name = store.getState().username
-    const [username, setUsername] = useState(name || '')
+    const {userName} = useSelector((state) => state.info)
+    const [username, setUsername] = useState(userName)
     const dispatch = useDispatch()
 
     const openForm = () => {
@@ -25,9 +25,6 @@ function UserTitle () {
     const saveName = () => {
         dispatch(changeUsername(username))
         setForm(false)
-        // setTimeout(() => {
-        //     window.location.reload(false)
-        // }, 500)
         
     }
 

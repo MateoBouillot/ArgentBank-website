@@ -6,9 +6,15 @@ import { useStore } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { useEffect } from 'react'
 import './User.scss'
+import { Account1, Account2, Account3 } from '../../assets/List'
 
 function User () {
 
+    const accounts = [
+        Account1,
+        Account2,
+        Account3
+    ]
     const Store = useStore()
     const navigate = useNavigate()
 
@@ -24,7 +30,7 @@ function User () {
             <UserTitle />
             <h2 className="sr-only">Accounts</h2>
             {
-                Store.getState().accounts.map(
+                accounts.map(
                     (item, index) => <Account key={index} info={item} />
                 )
             }

@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit"
 
 
 const initialState = {
-    username: null,
+    userName: null,
     firstName: null,
     lastName: null
 }
@@ -12,7 +12,7 @@ export const infoSlice = createSlice( {
     initialState,
     reducers: {
         getInfo: (state, action) => {
-            state.username = action.payload.username
+            state.userName = action.payload.userName
             state.firstName = action.payload.firstName
             state.lastName = action.payload.lastName
         }

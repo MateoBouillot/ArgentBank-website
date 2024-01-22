@@ -12,7 +12,6 @@ let state = {
 export const store = configureStore(
     {
         
-        preloadedState: state,
         reducer: {
             log: logSlice.reducer,
             info: infoSlice.reducer
