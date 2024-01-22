@@ -2,7 +2,7 @@ import Btn from '../btn/Btn'
 import './Form.scss'
 import {useState} from 'react'
 import {loginUser} from '../../redux/logThunk'
-import {useDispatch} from 'react-redux'
+import {useDispatch, useSelector} from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 
 
@@ -12,6 +12,8 @@ function Form () {
         classname:'sign-in__btn',
     }
     const dispatch = useDispatch()
+    const {error} = useSelector((state) => state.log)
+    console.log(error)
 
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
@@ -37,6 +39,9 @@ function Form () {
           ><input type="password" id="password" className='sign-in__wrapper__input' onChange={
             (e) => {setPassword(e.target.value)}} />
         </div>
+        {error !== null?
+            <p className='error'>{error}</p>: <></>
+        }
         <div className="sign-in__remember">
           <input type="checkbox" id="remember-me" /><label htmlFor="remember-me" className='sign-in__remember__label'
             >Remember me</label

@@ -35,6 +35,9 @@ export const loginUser = (email, password, navigate) => async (dispatch) => {
         if (answer.status === 400) {
             throw new Error('Invalid credentials')
         }
+        if (answer.status === 500) {
+            throw new Error('Internal server error')
+        }
         if (answer.status === 200) {
             const data = await answer.json()
             localStorage.setItem('token', data.body.token)
@@ -45,7 +48,7 @@ export const loginUser = (email, password, navigate) => async (dispatch) => {
         }
         
     } catch(error) {
-        dispatch(loginFailure(error.message))
+        dispatch(loginFailure({error: error.message}))
     }
 }
 
