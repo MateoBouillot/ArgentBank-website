@@ -2,7 +2,7 @@ import HeaderNav from '../../components/HeaderNav/HeaderNav'
 import Footer from '../../components/Footer/Footer'
 import UserTitle from '../../components/UserTitle/UserTitle'
 import Account from '../../components/account/Account'
-import { useStore } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { useEffect } from 'react'
 import './User.scss'
@@ -15,14 +15,16 @@ function User () {
         Account2,
         Account3
     ]
-    const Store = useStore()
+
     const navigate = useNavigate()
+    const { loggedIn } = useSelector((state) => (state.log))
 
-
-    if (Store.getState().loggedIn === false) {
-        console.log('test')
+    useEffect(() => {
+        if (loggedIn !== true) {
         navigate('/')
     }
+    })
+    
 
     return <>
         <HeaderNav />

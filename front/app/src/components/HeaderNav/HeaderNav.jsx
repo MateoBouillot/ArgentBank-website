@@ -2,7 +2,7 @@ import './HeaderNav.scss'
 import logo from '../../assets/argentBankLogo.webp'
 import { Link, useNavigate } from 'react-router-dom'
 import { useEffect } from 'react'
-import {useStore, useDispatch, useSelector} from 'react-redux'
+import { useDispatch, useSelector} from 'react-redux'
 import { checkLogIn, logout } from '../../redux/logThunk'
 import { getInfo } from '../../redux/infoSlice'
 
