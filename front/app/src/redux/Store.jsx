@@ -23,5 +23,3 @@ export const store = configureStore(
 
 
 
-// !!!!!! optimiser les images
-//     message d erreur

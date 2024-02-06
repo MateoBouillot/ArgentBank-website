@@ -29,7 +29,7 @@ function HeaderNav () {
             lastName: user[2]
         }))
         }
-      }, [dispatch, authToken, userName])
+      }, [dispatch, authToken, userName, user])
 
     return <nav className="navbar">
         <Link to='/' className="navbar__logo" >

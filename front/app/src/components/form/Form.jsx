@@ -13,7 +13,6 @@ function Form () {
     }
     const dispatch = useDispatch()
     const {error} = useSelector((state) => state.log)
-    console.log(error)
 
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
